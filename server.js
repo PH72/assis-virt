@@ -17,7 +17,7 @@ app.get('/', (request, response) => {
 
 app.post("/glpi", (request, response) => {
   var user = new UserGlpi(request.body.login,request.body.password);
-  user.initSession(request.headers['app-token']);
+  user.initSession(request.headers['app-token'],response);
   
   response.json({"user": {"login": user}});
 });
