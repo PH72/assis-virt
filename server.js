@@ -16,8 +16,14 @@ app.get('/', (request, response) => {
 });
 
 app.post("/glpi", async (request, response) => {
-  var user = new UserGlpi(request.body.login,request.body.password,request.headers['app-token']);
-  var ticket = request.body.ticket;
+  var user = new UserGlpi(request.body.queryResult.parameters['Login'],request.body.parameters['Senha'],request.headers['app-token']);
+  var ticket = {
+    name: request.body.queryResult.parameters['Titulo'],
+    content: request.body.queryResult.parameters['Assunto']
+  };
+  
+  console.log(ticket);
+  console.log(user);
   
   //Inicia sessão do usuário
   await user.initSession();
@@ -32,7 +38,7 @@ app.post("/glpi", async (request, response) => {
     response.json({"error": user.errorCreateTicket});
   }
   
-  response.json({"user": user});
+  response.json({"fullfillmenText": "Chamado criado com sucesso!"});
 });
 
 const listener = app.listen(process.env.PORT, () => {
