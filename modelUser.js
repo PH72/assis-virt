@@ -8,7 +8,7 @@ module.exports = class UserGlpi{
     this.password = password;
   }
   
-  async initSession(appToken,response){
+  async initSession(appToken){
     let buf = Buffer.from(this.login+':'+this.password);
     let encodedData = buf.toString('base64');
     console.log(encodedData);
@@ -21,36 +21,41 @@ module.exports = class UserGlpi{
       }
     }
     console.log('init');
-    var res = await request.get(options, function(err, response, body) {
+    var errorLogin;
+    await request.get(options, function(err, resp, body) {
       if (err) {
-        response.status(400).send({
-           message: err
-        });
+        errorLogin = {
+          statusCode: 400,
+          message: err
+        };
+        
+        return false;
       }
       
-      return JSON.parse(body);
-    });
-    
-    if(res.length > 0 && res[0].includes('ERROR')){
-      let statusCode;
-      let message = res[2];
-      switch(res[0]){
-        case 'ERROR_LOGIN_PARAMETERS_MISSING':
-          statusCode = 400;
-          break;
-        case 'ERROR_GLPI_LOGIN':
-          statusCode = 401;
-          break;
-        default:
-          statusCode = 400;
-          message = 'Não foi possível efetuar o login.'
-          break;
+      let res = JSON.parse(body);
+      if(res.length > 0 && res[0].includes('ERROR')){
+        let statusCode;
+        let message = res[1];
+        switch(res[0]){
+          case 'ERROR_LOGIN_PARAMETERS_MISSING':
+            statusCode = 400;
+            break;
+          case 'ERROR_GLPI_LOGIN':
+            statusCode = 401;
+            break;
+          default:
+            statusCode = 400;
+            message = 'Não foi possível efetuar o login.'
+            break;
+        }
+        errorLogin = {
+          statusCode,
+          message
+        };
+        return false;
       }
-      response.status(message).send({
-         message: res[2]
-      });
-    }
-    
-    this.sessionToken = res['session_token'];
+      if(errorLogin != undefined && errorLogin != null)
+        this.errorLogin = errorLogin;
+    });
   }
 }
