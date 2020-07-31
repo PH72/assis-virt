@@ -1,6 +1,6 @@
 'strict'
 
-const https = require('https');
+const request = require('request');
 
 module.exports = class UserGlpi{
   constructor(login,password){
@@ -12,16 +12,19 @@ module.exports = class UserGlpi{
     let buf = Buffer.from(this.login+':'+this.password);
     let encodedData = buf.toString('base64');
     
-    var request = {
-      host: 'https://http://chamados.febracis.com.br',
-      path: '/apirest.php/initSession',
-      method: 'POST',
+    var options = {
+      uri: 'https://chamados.febracis.com.br/apirest.php/initSession',
+      method: 'GET',
       headers: {
           'Content-Type': 'application/json',
           Authorization: 'Basic '+encodedData,
           'App-Token': appToken
       }
     }
-    
+    var req = request(options, function(error, response, body) {
+      console.log(error);
+      console.log(response);
+      console.log(body);
+    });
   }
 }
