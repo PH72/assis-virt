@@ -8,20 +8,20 @@ module.exports = class UserGlpi{
     this.password = password;
   }
   
-  initSession(){
+  initSession(appToken){
     let buf = Buffer.from(this.login+':'+this.password);
     let encodedData = buf.toString('base64');
     
-    console.log(encodedData);
-    
     var request = {
-      host: '',
-      path: '/compile',
+      host: 'https://http://chamados.febracis.com.br',
+      path: '/apirest.php/initSession',
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
           Authorization: 'Basic '+encodedData,
+          'App-Token': appToken
       }
     }
+    
   }
 }

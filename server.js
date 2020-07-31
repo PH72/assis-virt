@@ -15,11 +15,11 @@ app.get('/', (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/glpi", (request, response) => {
+app.post("/glpi", (request, response) => {
   var user = new UserGlpi(request.body.login,request.body.password);
-  //user.initSession();
+  user.initSession();
   
-  response.json(user);
+  response.json({"user": {"login": user}});
 });
 
 const listener = app.listen(process.env.PORT, () => {
