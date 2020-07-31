@@ -26,7 +26,7 @@ app.post("/glpi", async (request, response) => {
   console.log(user);
   
   //Inicia sessão do usuário
-  await user.initSession();
+  /*await user.initSession();
   //Verfica se foi iniciado corretamente
   if(user.errorLogin != undefined && user.errorLogin != null){
     response.json({"error": user.errorLogin});
@@ -36,7 +36,7 @@ app.post("/glpi", async (request, response) => {
   //Verifica se o chamado foi criado corretamente
   if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
     response.json({"error": user.errorCreateTicket});
-  }
+  }*/
   
   response.json({"fullfillmenText": "Chamado criado com sucesso!"});
 });
