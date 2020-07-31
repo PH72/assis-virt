@@ -19,14 +19,15 @@ app.post("/glpi", async (request, response) => {
   var user = new UserGlpi(request.body.login,request.body.password,request.headers['app-token']);
   var ticket = request.body.ticket;
   
+  //Inicia sessão do usuário
   await user.initSession();
-  
+  //Verfica se foi iniciado corretamente
   if(user.errorLogin != undefined && user.errorLogin != null){
     response.json({"error": user.errorLogin});
   }
-  
+  //Cria o chamado
   await user.createTicket(ticket.name,ticket.content);
-  
+  //Verifica se o chamado foi criado corretamente
   if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
     response.json({"error": user.errorCreateTicket});
   }

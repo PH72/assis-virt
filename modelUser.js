@@ -44,28 +44,30 @@ module.exports = class UserGlpi{
           'Content-Type': 'application/json',
           'Session-Token': this.session_token,
           'App-Token': this.appToken
+      },
+      data: {
+        input: {
+          name: name,
+          content: content,
+          status: 1,
+          urgency: 1,
+          _disablenotif: false
+        }
       }
     };
     
     var userGlpi = this;
     
     try{
-      await axios(options,{
-        input: {
-          name,
-          content,
-          status: 1,
-          urgency: 1,
-          _disablenotif: false
-        }
-      }).then((res) => {
+      await axios(options).then((res) => {
         console.log(res.data);
       });
     }catch(e){
-      /*userGlpi.errorCreateTicket = {
+      console.log(e);
+      userGlpi.errorCreateTicket = {
         statusCode: e.response.status,
         message: e.response.data[1]
-      }*/
+      }
     }
   }
 }
