@@ -1,3 +1,5 @@
+'strict'
+
 const https = require('https');
 
 export default class UserGlpi{

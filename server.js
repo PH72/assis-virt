@@ -1,7 +1,10 @@
-import  from './modelUser';
+'strict'
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const https = require("https");
+
+import UserGlpi from '/.modelUser.js';
 
 const app = express();
 
@@ -9,8 +12,8 @@ app.use(bodyParser.json())
 app.use(express.static("public"));
 
 app.get("/glpi", (request, response) => {
-  var user = new UserGlpi(request.body.login,request.body.password);
-  user.initSession();
+  //var user = new UserGlpi(request.body.login,request.body.password);
+  //user.initSession();
 });
 
 const listener = app.listen(process.env.PORT, () => {
