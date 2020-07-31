@@ -8,13 +8,12 @@ module.exports = class UserGlpi{
     this.password = password;
   }
   
-  initSession(appToken){
+  async initSession(appToken){
     let buf = Buffer.from(this.login+':'+this.password);
     let encodedData = buf.toString('base64');
     console.log(encodedData);
     var options = {
       url: 'http://chamados.febracis.com.br/apirest.php/initSession',
-      json: true,
       headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Basic '+encodedData,
@@ -22,11 +21,17 @@ module.exports = class UserGlpi{
       }
     }
     console.log('init');
-    request.get(options, function(err, response, body) {
+    var res = await request.get(options, function(err, response, body) {
       if (err) {
-        return console.log(JSON.parse(err)[0]);
+        return console.log(err);
       }
-      console.log(JSON.parse(body));
+      
+      return JSON.parse(body);
     });
+    
+    if(res.length > 0 && res[0].includes('ERROR'))
+          return console.log(res[0]);
+    
+    this.sessionToken = res['session_token'];
   }
 }
