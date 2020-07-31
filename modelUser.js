@@ -13,7 +13,7 @@ module.exports = class UserGlpi{
     let encodedData = buf.toString('base64');
     console.log(encodedData);
     var options = {
-      url: 'https://chamados.febracis.com.br/apirest.php/initSession',
+      url: 'http://chamados.febracis.com.br/apirest.php/initSession',
       json: true,
       headers: {
           'Content-Type': 'application/json',
@@ -24,10 +24,9 @@ module.exports = class UserGlpi{
     console.log('init');
     request.get(options, function(err, response, body) {
       if (err) {
-        return console.log(err);
+        return console.log(JSON.parse(err)[0]);
       }
       console.log(JSON.parse(body));
     });
-    console.log('end');
   }
 }
