@@ -28,6 +28,7 @@ span{
   background: #32e3f7;
   position: relative;
   overflow: hidden;
+  border-bottom: 2px solid #006fa3;
 }
 .box::before{
   content: "";

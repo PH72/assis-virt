@@ -16,29 +16,28 @@ app.get('/', (request, response) => {
 });
 
 app.post("/glpi", async (request, response) => {
-  var user = new UserGlpi(request.body.queryResult.parameters['Login'],request.body.parameters['Senha'],request.headers['app-token']);
+  var user = new UserGlpi(request.body.queryResult.parameters['Login'],request.body.queryResult.parameters['Senha'],request.headers['app-token']);
   var ticket = {
     name: request.body.queryResult.parameters['Titulo'],
-    content: request.body.queryResult.parameters['Assunto']
+    content: request.body.queryResult.parameters['Ticket']
   };
   
-  console.log(ticket);
-  console.log(user);
-  
   //Inicia sessão do usuário
-  /*await user.initSession();
+  await user.initSession();
   //Verfica se foi iniciado corretamente
   if(user.errorLogin != undefined && user.errorLogin != null){
+    console.log({"error": user.errorLogin});
     response.json({"error": user.errorLogin});
   }
   //Cria o chamado
   await user.createTicket(ticket.name,ticket.content);
   //Verifica se o chamado foi criado corretamente
   if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
+    console.log({"error": user.errorCreateTicket});
     response.json({"error": user.errorCreateTicket});
-  }*/
-  
-  response.json({"fullfillmenText": "Chamado criado com sucesso!"});
+  }
+  console.log("Chamado criado com sucesso!");
+  response.json({"fulfillmentMessages":"Chamado criado com sucesso!"}");
 });
 
 const listener = app.listen(process.env.PORT, () => {

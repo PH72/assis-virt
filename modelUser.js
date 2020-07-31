@@ -60,7 +60,7 @@ module.exports = class UserGlpi{
     
     try{
       await axios(options).then((res) => {
-        console.log(res.data);
+        userGlpi.ticketCreated = res.data;
       });
     }catch(e){
       console.log(e);
