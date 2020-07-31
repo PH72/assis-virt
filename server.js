@@ -1,4 +1,4 @@
-'strict'
+//'strict'
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -26,18 +26,16 @@ app.post("/glpi", async (request, response) => {
   await user.initSession();
   //Verfica se foi iniciado corretamente
   if(user.errorLogin != undefined && user.errorLogin != null){
-    console.log({"error": user.errorLogin});
-    response.json({"error": user.errorLogin});
+    response.json({"fulfillmentText":""+user.errorLogin.message});
   }
   //Cria o chamado
   await user.createTicket(ticket.name,ticket.content);
   //Verifica se o chamado foi criado corretamente
   if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
-    console.log({"error": user.errorCreateTicket});
-    response.json({"error": user.errorCreateTicket});
+    response.json({"fulfillmentText":""+user.errorCreateTicket.message});
   }
-  console.log("Chamado criado com sucesso!");
-  response.json({"fulfillmentMessages":"Chamado criado com sucesso!"}");
+  
+  response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
 });
 
 const listener = app.listen(process.env.PORT, () => {
