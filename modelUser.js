@@ -2,7 +2,7 @@
 
 const https = require('https');
 
-export default class UserGlpi{
+module.exports = class UserGlpi{
   constructor(login,password){
     this.login = login;
     this.password = password;

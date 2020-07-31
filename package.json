@@ -25,9 +25,5 @@
     "node",
     "glitch",
     "express"
-  ],
-  "devDependencies": {
-    "@babel/core": "^7.11.0",
-    "@babel/node": "^7.10.5"
-  }
+  ]
 }
