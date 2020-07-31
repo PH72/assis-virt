@@ -36,32 +36,36 @@ module.exports = class UserGlpi{
     }
   }
   
-  async createTicket(name,content,status){
+  async createTicket(name,content){
     var options = {
-      url: 'http://chamados.febracis.com.br/apirest.php/Tickect',
+      url: 'http://chamados.febracis.com.br/apirest.php/Ticket',
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
           'Session-Token': this.session_token,
           'App-Token': this.appToken
       }
-    }
-    var body = JSON.stringify({
+    };
+    
+    var userGlpi = this;
+    
+    try{
+      await axios(options,{
         input: {
           name,
           content,
-          status,
+          status: 1,
           urgency: 1,
           _disablenotif: false
         }
-    })
-    
-    try{
-      
-    }catch(e){
-      await axios(options,).then((res) => {
-        userGlpi.session_token = res.data.session_token;
+      }).then((res) => {
+        console.log(res.data);
       });
+    }catch(e){
+      /*userGlpi.errorCreateTicket = {
+        statusCode: e.response.status,
+        message: e.response.data[1]
+      }*/
     }
   }
 }
