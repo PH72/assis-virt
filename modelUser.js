@@ -1,6 +1,6 @@
 'strict'
 
-const request = require('request');
+const https = require('https');
 
 module.exports = class UserGlpi{
   constructor(login,password){
@@ -13,7 +13,8 @@ module.exports = class UserGlpi{
     let encodedData = buf.toString('base64');
     console.log(encodedData);
     var options = {
-      url: 'http://chamados.febracis.com.br/apirest.php/initSession',
+      url: '/apirest.php/initSession',
+      method: 'Ge'
       headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Basic '+encodedData,
@@ -22,17 +23,9 @@ module.exports = class UserGlpi{
     }
     
     var errorLogin;
-    request.get(options, function(err, resp, body) {
-      if (err) {
-        errorLogin = {
-          statusCode: 400,
-          message: err
-        };
-        console.log(errorLogin);
-        return false;
-      }
+    https.get(options, function(err, resp, body) {
       
-      let res = JSON.parse(body);
+      /*let res = JSON.parse(body);
       if(res.length > 0 && res[0].includes('ERROR')){
         let statusCode;
         let message = res[1];
@@ -54,7 +47,26 @@ module.exports = class UserGlpi{
         };
         console.log(errorLogin);
         return false;
-      }
+      }*/
+      
+      let data = '';
+
+      // A chunk of data has been received.
+      resp.on('data', (chunk) => {
+        data += chunk;
+        console.log(data);
+      });
+
+      // The whole response has been received. Print out the result.
+      resp.on('end', () => {
+        console.log(JSON.parse(data).explanation);
+      });  
+    }).on("error", (err) => {
+      console.log(err.message);
+      errorLogin = {
+          statusCode: 400,
+          message: err.message
+        };
     });
     
     if(errorLogin != undefined && errorLogin != null)

@@ -26,7 +26,7 @@ app.post("/glpi", async (request, response) => {
     response.json({"error": user.errorLogin});
   }
   
-  //response.json({"user": {"login": user}});
+  response.json({"user": {"login": user}});
 });
 
 const listener = app.listen(process.env.PORT, () => {
