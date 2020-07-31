@@ -1,3 +1,5 @@
+const https = require('https');
+
 module.exports = class UserGlpi{
   constructor(login,password){
     this.login = login;
@@ -5,6 +7,14 @@ module.exports = class UserGlpi{
   }
   
   initSession(){
-    
+    var request = {
+      host: '',
+      path: '/compile',
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Basic',
+      }
+    }
   }
 }

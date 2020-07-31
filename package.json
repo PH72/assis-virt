@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "body-parser": "*",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "https": "*"
   },
   "engines": {
     "node": "12.x"

@@ -1,6 +1,7 @@
 dependencies:
   body-parser: 1.19.0
   express: 4.17.1
+  https: 1.0.0
 packages:
   /accepts/1.3.7:
     dependencies:
@@ -185,6 +186,10 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-ZTTX0MWrsQ2ZAhA1cejAwDLycFsd7I7nVtnkT3Ol0aqodaKW+0CTZDQ1uBv5whptCnc8e8HeRRJxRs0kmm/Qfw==
+  /https/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-PDfHrhqO65ZpBKKtHpdaGUt+06Q=
   /iconv-lite/0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -396,3 +401,4 @@ shrinkwrapVersion: 3
 specifiers:
   body-parser: '*'
   express: ^4.17.1
+  https: '*'
