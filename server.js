@@ -44,11 +44,11 @@ app.post("/glpi", async (request, response) => {
   
   else if (intentName == "problemas.rede - Caiu - Resolvido"){
     
-    response.jason({"fulfillmenteText":"Problema resolvido"})
+    response.json({"fulfillmentText":"Problema resolvido"})
     
   }
   
-  
+  //response.json({"fulfillmentText":intentName})
   
 });
 
