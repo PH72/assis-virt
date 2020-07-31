@@ -1,6 +1,6 @@
 'strict'
 
-const https = require('https');
+const axios = require('axios');
 
 module.exports = class UserGlpi{
   constructor(login,password){
@@ -13,8 +13,8 @@ module.exports = class UserGlpi{
     let encodedData = buf.toString('base64');
     console.log(encodedData);
     var options = {
-      url: '/apirest.php/initSession',
-      method: 'Ge'
+      url: 'http://chamados.febracis.com.br/apirest.php/initSession',
+      method: 'GET',
       headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Basic '+encodedData,
@@ -22,55 +22,16 @@ module.exports = class UserGlpi{
       }
     }
     
-    var errorLogin;
-    https.get(options, function(err, resp, body) {
-      
-      /*let res = JSON.parse(body);
-      if(res.length > 0 && res[0].includes('ERROR')){
-        let statusCode;
-        let message = res[1];
-        switch(res[0]){
-          case 'ERROR_LOGIN_PARAMETERS_MISSING':
-            statusCode = 400;
-            break;
-          case 'ERROR_GLPI_LOGIN':
-            statusCode = 401;
-            break;
-          default:
-            statusCode = 400;
-            message = 'Não foi possível efetuar o login.'
-            break;
-        }
-        errorLogin = {
-          statusCode,
-          message
-        };
-        console.log(errorLogin);
-        return false;
-      }*/
-      
-      let data = '';
-
-      // A chunk of data has been received.
-      resp.on('data', (chunk) => {
-        data += chunk;
-        console.log(data);
+    var userGlpi = this;
+    try{
+      await axios(options).then((res) => {
+        userGlpi.session_token = res.data.session_token;
       });
-
-      // The whole response has been received. Print out the result.
-      resp.on('end', () => {
-        console.log(JSON.parse(data).explanation);
-      });  
-    }).on("error", (err) => {
-      console.log(err.message);
-      errorLogin = {
-          statusCode: 400,
-          message: err.message
-        };
-    });
-    
-    if(errorLogin != undefined && errorLogin != null)
-        this.errorLogin = errorLogin;
-    
+    }catch(e){
+      userGlpi.errorLogin = {
+        statusCode: e.response.status,
+        message: e.response.data[1]
+      }
+    }
   }
 }

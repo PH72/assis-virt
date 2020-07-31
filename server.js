@@ -20,13 +20,11 @@ app.post("/glpi", async (request, response) => {
   
   await user.initSession(request.headers['app-token'],response);
   
-  console.log(user.errorLogin);
-  
   if(user.errorLogin != undefined && user.errorLogin != null){
     response.json({"error": user.errorLogin});
   }
   
-  response.json({"user": {"login": user}});
+  response.json({"user": user});
 });
 
 const listener = app.listen(process.env.PORT, () => {
