@@ -18,17 +18,12 @@ app.get('/', (request, response) => {
 app.post("/glpi", async (request, response) => {
   var user = new UserGlpi(request.body.login,request.body.password);
   
-  user.initSession(request.headers['app-token'],response);
+  await user.initSession(request.headers['app-token'],response);
   
   console.log(user.errorLogin);
   
   if(user.errorLogin != undefined && user.errorLogin != null){
-    response.status(user.errorLogin.statusCode).send({
-       message: user.errorLogin.message
-    });
-    response.json({"error": {"login": user}});
-    
-    return;
+    response.json({"error": user.errorLogin});
   }
   
   //response.json({"user": {"login": user}});

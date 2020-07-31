@@ -20,15 +20,15 @@ module.exports = class UserGlpi{
           'App-Token': appToken
       }
     }
-    console.log('init');
+    
     var errorLogin;
-    await request.get(options, function(err, resp, body) {
+    request.get(options, function(err, resp, body) {
       if (err) {
         errorLogin = {
           statusCode: 400,
           message: err
         };
-        
+        console.log(errorLogin);
         return false;
       }
       
@@ -52,10 +52,13 @@ module.exports = class UserGlpi{
           statusCode,
           message
         };
+        console.log(errorLogin);
         return false;
       }
-      if(errorLogin != undefined && errorLogin != null)
-        this.errorLogin = errorLogin;
     });
+    
+    if(errorLogin != undefined && errorLogin != null)
+        this.errorLogin = errorLogin;
+    
   }
 }
