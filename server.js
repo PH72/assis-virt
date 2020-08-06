@@ -44,7 +44,18 @@ app.post("/glpi", async (request, response) => {
   
   else if (intentName == "Problema.Internet - sem.Internet"){
     
-    response.json({"fulfillmentText":"Not Error"})
+    response.json({
+  "fulfillmentMessages": [
+    {
+      "card": {
+        "title": "card title",
+        "subtitle": "card text",
+        "imageUri": "gs://webhook-9a993.appspot.com/Tutoriais/Sem título.png"
+        
+      }
+    }
+  ]
+})
     
     }
   
