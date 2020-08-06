@@ -42,11 +42,11 @@ app.post("/glpi", async (request, response) => {
         response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
   }
   
-  else if (intentName == "problemas.rede - Caiu - Resolvido"){
+  else if (intentName == "Problema.Internet - sem.Internet"){
     
-    response.json({"fulfillmentText":"Problema resolvido"})
+    response.json({"fulfillmentText":"Not Error"})
     
-  }
+    }
   
   //response.json({"fulfillmentText":intentName})
   
