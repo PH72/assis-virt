@@ -82,7 +82,7 @@ app.post("/glpi", async (request, response) => {
     {
       "text": {
          "text": [
-          "Primeiro Passo: Verifique se o seu computador está conectado a internet, va até o canto inferior esquerdo da tela onde você verá um ícone referente a rede."
+          "Após realizar os Procedimentos abaixo me infome se você conseguiu ou não resolver o problema."
                  ]
           }
     }  
