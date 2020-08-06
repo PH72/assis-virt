@@ -19,7 +19,7 @@ app.post("/glpi", async (request, response) => {
   
   var intentName = request.body.queryResult.intent.displayName;
   
-  if (intentName == "faq.TI"|| ""){
+  if (intentName == "faq.TI"){
         var user = new UserGlpi(request.body.queryResult.parameters['Login'],request.body.queryResult.parameters['Senha'],request.headers['app-token']);
         var ticket = {
           name: request.body.queryResult.parameters['Titulo'],
