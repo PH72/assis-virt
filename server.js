@@ -55,19 +55,19 @@ app.post("/glpi", async (request, response) => {
     }
   ]
    })
-   response.json({
-    "fulfillmentMessages": [
+   response.json({"fulfillmentMessages": [
       {
         "text": {
           "text": [
-            "Primeiro Passo: Verifique se o seu computador está conectado a internet "
+            "Primeiro Passo: Verifique se o seu computador está conectado a internet, va até o canto inferior esquerdo da tela onde você verá um ícone referente a rede \n\n",
+            "teste"
           ]
         }
       }
     ]
   }) 
     
-    }
+ }
   
   //response.json({"fulfillmentText":intentName})
   
