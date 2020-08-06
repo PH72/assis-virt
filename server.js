@@ -50,7 +50,7 @@ app.post("/glpi", async (request, response) => {
       "card": {
         "title": "card title",
         "subtitle": "card text",
-        "imageUri": "gs://webhook-9a993.appspot.com/Tutoriais/Sem título.png"
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/webhook-9a993.appspot.com/o/Tutoriais%2FSem%20t%C3%ADtulo.png?alt=media&token=51b1f74b-2000-4f7c-ab9f-3baad59eba8d"
         
       }
     }
