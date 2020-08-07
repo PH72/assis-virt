@@ -30,14 +30,15 @@ app.post("/glpi", async (request, response) => {
         await user.initSession();
         //Verfica se foi iniciado corretamente
         if(user.errorLogin != undefined && user.errorLogin != null){
-          response.json({"fulfillmentText":""+user.errorLogin.message});
+          response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
+        
         }
         //Cria o chamado
         await user.createTicket(ticket.name,ticket.content);
         //Verifica se o chamado foi criado corretamente
         if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
-          response.json({"fulfillmentText":"teste"});
+          
         }
 
         response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
