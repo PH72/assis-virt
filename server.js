@@ -37,6 +37,7 @@ app.post("/glpi", async (request, response) => {
         //Verifica se o chamado foi criado corretamente
         if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
+          response.json({"fulfillmentText":"teste"});
         }
 
         response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
