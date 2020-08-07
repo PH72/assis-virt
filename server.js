@@ -102,7 +102,17 @@ app.post("/glpi", async (request, response) => {
   
   else if (intentName == "Problema.Internet - Internet.Lenta"){
     
-    
+   response.json({"fulfillmentMessages":
+     [
+       
+        {
+         "card": {
+           "imageUri": "https://firebasestorage.googleapis.com/v0/b/webhook-9a993.appspot.com/o/Tutoriais%2FSem%20t%C3%ADtulo%201.png?alt=media&token=02deb325-3ea9-4b7a-bc27-69e6a0318b46"
+                 }
+        } 
+     
+     ] 
+   }) 
     
     
     
