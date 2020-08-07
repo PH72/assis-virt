@@ -99,6 +99,15 @@ app.post("/glpi", async (request, response) => {
     
  }
   
+  
+  else if (intentName == "Problema.Internet - Internet.Lenta"){
+    
+    
+    
+    
+    
+  }
+  
   //response.json({"fulfillmentText":intentName})
   
 });
