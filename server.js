@@ -22,7 +22,7 @@ app.post("/glpi", async (request, response) => {
   if (intentName == "Problema - NaoResolvido - Abrir Chamado"){
         var user = new UserGlpi(process.env.Login,process.env.Senha,request.headers['app-token']);
         var ticket = {
-          name: request.body.queryResult.parameters['Titulo'],
+          name: intentName,
           content: request.body.queryResult.parameters['Ticket']
         };
 
