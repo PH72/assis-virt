@@ -44,6 +44,36 @@ app.post("/glpi", async (request, response) => {
         response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
   }
   
+  
+  
+  
+  if (intentName == "Criação de Email"){
+        var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+        var unidade = request.body.queryResult.parameters['Unidade'];
+        
+
+        //Inicia sessão do usuário
+        await user.initSession();
+        //Verfica se foi iniciado corretamente
+        if(user.errorLogin != undefined && user.errorLogin != null){
+          response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
+        
+        }
+        //Cria o chamado
+        await user.createTicket(ticket.name,ticket.content);
+        //Verifica se o chamado foi criado corretamente
+        if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
+          response.json({"fulfillmentText":""+user.errorCreateTicket.message});
+          
+        }
+
+        response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
+  }
+  
+  
+  
+  
+  
   else if (intentName == "Problema.Internet - sem.Internet"){
     
     response.json({"fulfillmentMessages": 
