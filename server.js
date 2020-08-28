@@ -48,9 +48,10 @@ app.post("/glpi", async (request, response) => {
   
   
   if (intentName == "Criação de Email"){
-        var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
-        var unidade = request.body.queryResult.parameters['Unidade'];
-        
+        let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+        let nome = request.body.queryResult.parameters['Nome'];
+        let unidade = request.body.queryResult.parameters['Unidade'];
+        let utilidade = request.body.queryResult.parameters['Utilidade'];
 
         //Inicia sessão do usuário
         await user.initSession();
@@ -60,7 +61,7 @@ app.post("/glpi", async (request, response) => {
         
         }
         //Cria o chamado
-        await user.createTicket(ticket.name,ticket.content);
+        await user.createTicket("Criação de e-mail "+unidade,"Criação de e-mail para o colaborador "+nome+"\n"+utilidade);
         //Verifica se o chamado foi criado corretamente
         if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
