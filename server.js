@@ -19,7 +19,24 @@ app.post("/glpi", async (request, response) => {
   
   var intentName = request.body.queryResult.intent.displayName;
   
-  if (intentName == "Abertura-de-chamados"){
+  
+  if (intentName == "internet_caiu_Não_Resolvido"){
+  
+  response.json(
+          {
+        "followupEventInput": {
+          "name": "teste",
+          "parameters": {
+            "parameter-name-1": "parameter-value-1",
+            "parameter-name-2": "parameter-value-2"
+          },
+          "languageCode": "en-US"
+        }
+      }
+    
+  );
+  
+  if (intentName == "internet_caiu_Não_Resolvido"){
         var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
         var ticket = {
           name: intentName,
