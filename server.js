@@ -20,17 +20,12 @@ app.post("/glpi", async (request, response) => {
   var intentName = request.body.queryResult.intent.displayName;
   
   
-  if (intentName == "internet_caiu_Não_Resolvido"){
+  if (intentName == "Impressora_não_Instalada"){
   
   response.json(
           {
         "followupEventInput": {
-          "name": "teste",
-          "parameters": {
-            "parameter-name-1": "parameter-value-1",
-            "parameter-name-2": "parameter-value-2"
-          },
-          "languageCode": "en-US"
+          "name": "teste","languageCode": "en-US"
         }
       }
     
