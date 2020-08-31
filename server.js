@@ -19,7 +19,7 @@ app.post("/glpi", async (request, response) => {
   
   var intentName = request.body.queryResult.intent.displayName;
   
-  if (intentName == "Problema - NaoResolvido - Abrir Chamado"){
+  if (intentName == "Abertura-de-chamados"){
         var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
         var ticket = {
           name: intentName,
@@ -61,17 +61,18 @@ app.post("/glpi", async (request, response) => {
         
         }
         //Cria o chamado
-        await user.createTicket("Criação de e-mail "+unidade,"Criação de e-mail para o colaborador "+nome+"\n"+utilidade);
+        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Criação de e-mail para o colaborador "+nome+"\n\n"+utilidade);
         //Verifica se o chamado foi criado corretamente
         if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
           
         }
 
-        response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
+        response.json({"fulfillmentText":"Um chamado para a criação do seu e-mail foi aberto,"});
+        response.json({"fulfillmentText":" em breve um de nosso analista irá ralizar o atendimento!\n"});
+        response.json({"fulfillmentText":"id: "+user.ticketCreated.id+"."});
+    
   }
-  
-  
   
   
   
