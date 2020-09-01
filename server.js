@@ -64,7 +64,7 @@ app.post("/glpi", async (request, response) => {
         
         }
         //Cria o chamado
-        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Nome:"+nome+"\n"+"\n"+utilidade+"\n\nSolicitado por:"+userGlpi);
+        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Nome:"+nome+"\n"+"\n"+utilidade+"\n\nSolicitado por: "+userGlpi);
         //Verifica se o chamado foi criado corretamente
         if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
