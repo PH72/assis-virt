@@ -8,6 +8,8 @@ const UserGlpi = require("./modelUser.js");
 
 const app = express();
 
+const {WebhookClient} = require('dialogflow-fulfillment');
+
 app.use(bodyParser.json())
 app.use(express.static("public"));
   
@@ -20,7 +22,11 @@ app.post("/glpi", async (request, response) => {
   var intentName = request.body.queryResult.intent.displayName;
   
   
-  if
+  if (intentName == "Internet_lenta_não_resolvido"){
+    
+    
+    
+  }
   
   
   if (intentName == "internet_caiu_Não_Resolvido"){
