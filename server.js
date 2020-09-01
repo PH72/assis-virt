@@ -19,12 +19,14 @@ app.get('/', (request, response) => {
 
 app.post("/glpi", async (request, response) => {
   
-  var intentName = request.body.queryResult.intent.displayName;
+  const agent = new WebhookClient({ request:request, response:response });
   
+  var intentName = request.body.queryResult.intent.displayName;
   
   if (intentName == "Internet_lenta_não_resolvido"){
     
-    
+    agent.add("");
+    agent.setFollowupEvent('teste');
     
   }
   
