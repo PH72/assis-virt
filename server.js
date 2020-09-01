@@ -23,10 +23,13 @@ app.post("/glpi", async (request, response) => {
   
   var intentName = request.body.queryResult.intent.displayName;
   
+  
   let intentMap = new Map();
   intentMap.set('Internet_lenta_não_resolvido',Abre_Chamados);
   intentMap.set('Impressora_não_Instalada',Abre_Chamados);
   agent.handleRequest(intentMap);
+  
+  
   
   function Abre_Chamados(agent){
   
