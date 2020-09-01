@@ -24,15 +24,18 @@ app.post("/glpi", async (request, response) => {
   var intentName = request.body.queryResult.intent.displayName;
   
   let intentMap = new Map();
-  intentMap.set('')
+  intentMap.set('Internet_lenta_não_resolvido',Abre_Chamados);
+  agent.handleRequest(intentMap);
   
-  if (intentName == "Internet_lenta_não_resolvido"){
-    
-    agent.add("");
-    agent.setFollowupEvent('teste');
-    
+  function Abre_Chamados(agent){
+  
+    if (intentName == "Internet_lenta_não_resolvido"){
+
+      agent.add("");
+      agent.setFollowupEvent('teste');
+
+    }
   }
-  
   
   if (intentName == "internet_caiu_Não_Resolvido"){
         var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
