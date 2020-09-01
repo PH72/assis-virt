@@ -20,6 +20,8 @@ app.post("/glpi", async (request, response) => {
   var intentName = request.body.queryResult.intent.displayName;
   
   
+  if
+  
   
   if (intentName == "internet_caiu_Não_Resolvido"){
         var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
