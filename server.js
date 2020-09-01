@@ -51,6 +51,7 @@ app.post("/glpi", async (request, response) => {
   
   if (intentName == "Criação_de_Email"){
         let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+        let userGlpi = request.body.queryResult.parameters['Usuario']
         let nome = request.body.queryResult.parameters['Nome'];
         let unidade = request.body.queryResult.parameters['Unidade'];
         let utilidade = request.body.queryResult.parameters['Utilidade'];
@@ -63,14 +64,14 @@ app.post("/glpi", async (request, response) => {
         
         }
         //Cria o chamado
-        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Criação de e-mail para o colaborador "+nome+"\n"+"\n"+utilidade);
+        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Nome:"+nome+"\n"+"\n"+utilidade+"\n\nSolicitado por:"+userGlpi);
         //Verifica se o chamado foi criado corretamente
         if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
           
         }
 
-        response.json({"fulfillmentText":"Um chamado para a criação do seu e-mail foi aberto, em breve um de nosso analista irá ralizar o atendimento!\n id: "+user.ticketCreated.id+"."});
+        response.json({"fulfillmentText":"Um chamado para a criação do seu e-mail foi aberto, em breve um de nosso analista irá ralizar o atendimento!\n id do Chamado: "+user.ticketCreated.id+"."});
         
     
   }
