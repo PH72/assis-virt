@@ -63,16 +63,15 @@ app.post("/glpi", async (request, response) => {
         
         }
         //Cria o chamado
-        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Criação de e-mail para o colaborador "+nome+"\n"+utilidade);
+        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Criação de e-mail para o colaborador "+nome+"\n"+"\n"+utilidade);
         //Verifica se o chamado foi criado corretamente
         if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
           
         }
 
-        response.json({"fulfillmentText":"Um chamado para a criação do seu e-mail foi aberto, em breve um de nosso analista irá ralizar o atendimento!\n"});
-        response.json({"fulfillmentText":" em breve um de nosso analista irá ralizar o atendimento!\n"});
-        response.json({"fulfillmentText":"id: "+user.ticketCreated.id+"."});
+        response.json({"fulfillmentText":"Um chamado para a criação do seu e-mail foi aberto, em breve um de nosso analista irá ralizar o atendimento!\n id: "+user.ticketCreated.id+"."});
+        
     
   }
   
