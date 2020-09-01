@@ -23,6 +23,9 @@ app.post("/glpi", async (request, response) => {
   
   var intentName = request.body.queryResult.intent.displayName;
   
+  let intentMap = new Map();
+  intentMap.set('')
+  
   if (intentName == "Internet_lenta_não_resolvido"){
     
     agent.add("");
