@@ -27,7 +27,7 @@ app.post("/glpi", async (request, response) => {
       
       intentMap.set('Internet_lenta_não_resolvido',Abre_Chamados);
       intentMap.set('Impressora_não_Instalada',Abre_Chamados);
-      agent.handleRequest(intentMap);
+      //agent.handleRequest(intentMap);
  
     
     function Abre_Chamados(agent){
@@ -61,8 +61,8 @@ app.post("/glpi", async (request, response) => {
           
         }
 
-        agent.add("teste");
-        //response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
+        
+        response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
   }
   
   
