@@ -39,11 +39,11 @@ app.post("/glpi", async (request, response) => {
           agent.setFollowupEvent('teste');
 
         }
-  }
+  /
   
   
   
-  if (intentName == "internet_caiu_Não_Resolvido"){
+  if (intentName == "Abre_Chamados"){
         var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
         var ticket = {
           name: intentName,
@@ -70,7 +70,7 @@ app.post("/glpi", async (request, response) => {
   
   
   
-  if (intentName == "Abre_Chamados"){
+  if (intentName == ""){
         let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
         let userGlpi = request.body.queryResult.parameters['Usuario']
         let nome = request.body.queryResult.parameters['Nome'];
