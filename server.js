@@ -26,10 +26,10 @@ app.post("/glpi", async (request, response) => {
   
   if (intentName == "Internet_lenta_não_resolvido"||"Impressora_não_Instalada"){
   
-  /*    let intentMap = new Map();
+     let intentMap = new Map();
       intentMap.set('Internet_lenta_não_resolvido',Abre_Chamados);
       intentMap.set('Impressora_não_Instalada',Abre_Chamados);
-      agent.handleRequest(intentMap);*/
+      //agent.handleRequest(intentMap);
 
 
 
