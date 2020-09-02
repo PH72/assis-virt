@@ -25,20 +25,20 @@ app.post("/glpi", async (request, response) => {
   
   
   
-  
+  if (intentName == "Internet_lenta_não_resolvido"||"Impressora_não_Instalada"){
       let intentMap = new Map();
       
       intentMap.set('Internet_lenta_não_resolvido',Abre_Chamados);
       intentMap.set('Impressora_não_Instalada',Abre_Chamados);
-      agent.handleRequest(intentMap);
  
     
     function Abre_Chamados(agent){
+          agent.handleRequest(intentMap);
           agent.add("");
           agent.setFollowupEvent('teste');
 
         }
-  
+  }
   
   
   
@@ -63,8 +63,8 @@ app.post("/glpi", async (request, response) => {
           response.json({"fulfillmentText":""+user.errorCreateTicket.message});
           
         }
-        response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
 
+        response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
         //agent.add('Chamado criado com sucesso! id: '+user.ticketCreated.id+'.');
   }
   
