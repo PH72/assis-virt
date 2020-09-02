@@ -26,16 +26,12 @@ app.post("/glpi", async (request, response) => {
   
   if (intentName == "Internet_lenta_não_resolvido"||"Impressora_não_Instalada"){
   
-  /*    let intentMap = new Map();
+      let intentMap = new Map();
+      
+      function Abre_Chamados(agent){
       intentMap.set('Internet_lenta_não_resolvido',Abre_Chamados);
       intentMap.set('Impressora_não_Instalada',Abre_Chamados);
-      agent.handleRequest(intentMap);*/
-
-
-
-      function Abre_Chamados(agent){
-
-
+      agent.handleRequest(intentMap);
           agent.add("");
           agent.setFollowupEvent('teste');
 
@@ -45,8 +41,8 @@ app.post("/glpi", async (request, response) => {
   
   
   if (intentName == "Abre_Chamados"){
-        var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
-        var ticket = {
+        let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+        let ticket = {
           name: intentName,
           content: request.body.queryResult.parameters['Ticket']
         };
