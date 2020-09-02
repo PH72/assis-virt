@@ -32,8 +32,8 @@ app.post("/glpi", async (request, response) => {
     
     function Abre_Chamados(agent){
 
-          agent.add("olá");
-          //agent.setFollowupEvent('teste');
+          agent.add("");
+          agent.setFollowupEvent('teste');
       
     }
   
@@ -61,8 +61,8 @@ app.post("/glpi", async (request, response) => {
           
         }
 
-        response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
-        //agent.add('Chamado criado com sucesso! id: '+user.ticketCreated.id+'.');
+        agent.add("teste");
+        //response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
   }
   
   
