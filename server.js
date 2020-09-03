@@ -23,27 +23,23 @@ app.post("/glpi", async (request, response) => {
   
   var intentName = request.body.queryResult.intent.displayName;
   
-  
-  if (intentName == "Internet_lenta_não_resolvido" || intentName == "Impressora_não_Instalada"){
-  
-     let intentMap = new Map();
-      //intentMap.set('Internet_lenta_não_resolvido',Abre_Chamados);
-      //intentMap.set('Impressora_não_Instalada',Abre_Chamados);
-      //agent.handleRequest(intentMap);
+  let intentMap = new Map();
+    intentMap.set('Internet_lenta_não_resolvido',teste);
+    intentMap.set('Impressora_não_Instalada',teste);
+    intentMap.set('Abre_Chamados',Abre_Chamados);
+    intentMap.set('Abre_Chamados',Abre_Chamados);
+    intentMap.set('Abre_Chamados',Abre_Chamados);
+    intentMap.set('Abre_Chamados',Abre_Chamados);
+    agent.handleRequest(intentMap);
 
-
-
-      //function Abre_Chamados(agent){
-
-
-          agent.add("");
-          //agent.setFollowupEvent('teste');
-        //}
-  }
+    function teste(agent){
+        agent.add("");
+        agent.setFollowupEvent('teste');
+    }
   
   
   
-  if (intentName == "Abre_Chamados"){
+  function Abre_Chamados(agent){
         var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
         var ticket = {
           name: intentName,
@@ -66,7 +62,7 @@ app.post("/glpi", async (request, response) => {
         }
 
         response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
-        //agent.add('Chamado criado com sucesso! id: '+user.ticketCreated.id+'.');
+        
   }
   
   
