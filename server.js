@@ -3,11 +3,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
-
 const UserGlpi = require("./modelUser.js");
-
 const app = express();
-
 const {WebhookClient} = require('dialogflow-fulfillment');
 
 app.use(bodyParser.json())
