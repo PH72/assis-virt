@@ -62,6 +62,8 @@ app.post("/glpi", async (request, response) => {
     response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
   }
   
+  
+  
   if (intentName == ""){
     let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
     let userGlpi = request.body.queryResult.parameters['Usuario']
