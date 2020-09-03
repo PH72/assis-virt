@@ -24,77 +24,69 @@ app.post("/glpi", async (request, response) => {
   var intentName = request.body.queryResult.intent.displayName;
   
   let intentMap = new Map();
-    intentMap.set('Internet_lenta_não_resolvido',teste);
-    intentMap.set('Impressora_não_Instalada',teste);
-    intentMap.set('Abre_Chamados',Abre_Chamados);
-    intentMap.set('Abre_Chamados',Abre_Chamados);
-    intentMap.set('Abre_Chamados',Abre_Chamados);
-    intentMap.set('Abre_Chamados',Abre_Chamados);
-    agent.handleRequest(intentMap);
+  intentMap.set('Internet_lenta_não_resolvido',teste);
+  intentMap.set('Impressora_não_Instalada',teste);
+  intentMap.set('Abre_Chamados',Abre_Chamados);
 
-    function teste(agent){
-        agent.add("");
-        agent.setFollowupEvent('teste');
-    }
-  
-  
-  
-  function Abre_Chamados(agent){
-        var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
-        var ticket = {
-          name: intentName,
-          content: request.body.queryResult.parameters['Ticket']
-        };
+  agent.handleRequest(intentMap);
 
-        //Inicia sessão do usuário
-        await user.initSession();
-        //Verfica se foi iniciado corretamente
-        if(user.errorLogin != undefined && user.errorLogin != null){
-          response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
-        
-        }
-        //Cria o chamado
-        await user.createTicket(ticket.name,ticket.content);
-        //Verifica se o chamado foi criado corretamente
-        if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
-          response.json({"fulfillmentText":""+user.errorCreateTicket.message});
-          
-        }
-
-        response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
-        
+  function teste(agent){
+      agent.add("");
+      agent.setFollowupEvent('teste');
   }
-  
-  
+
+  async function Abre_Chamados(agent){
+    var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    
+    var ticket = {
+      name: intentName,
+      content: request.body.queryResult.parameters['Ticket']
+    };
+
+    //Inicia sessão do usuário
+    await user.initSession();
+    
+    //Verfica se foi iniciado corretamente
+    if(user.errorLogin != undefined && user.errorLogin != null){
+      response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
+
+    }
+    
+    //Cria o chamado
+    await user.createTicket(ticket.name,ticket.content);
+    
+    //Verifica se o chamado foi criado corretamente
+    if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
+      response.json({"fulfillmentText":""+user.errorCreateTicket.message});
+    }
+    
+    response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
+  }
   
   if (intentName == ""){
-        let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
-        let userGlpi = request.body.queryResult.parameters['Usuario']
-        let nome = request.body.queryResult.parameters['Nome'];
-        let unidade = request.body.queryResult.parameters['Unidade'];
-        let utilidade = request.body.queryResult.parameters['Utilidade'];
+    let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    let userGlpi = request.body.queryResult.parameters['Usuario']
+    let nome = request.body.queryResult.parameters['Nome'];
+    let unidade = request.body.queryResult.parameters['Unidade'];
+    let utilidade = request.body.queryResult.parameters['Utilidade'];
 
-        //Inicia sessão do usuário
-        await user.initSession();
-        //Verfica se foi iniciado corretamente
-        if(user.errorLogin != undefined && user.errorLogin != null){
-          response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
-        
-        }
-        //Cria o chamado
-        await user.createTicket("Criação de e-mail para a unidade "+unidade,"Nome:"+nome+"\n"+"\n"+utilidade+"\n\nSolicitado por: "+userGlpi);
-        //Verifica se o chamado foi criado corretamente
-        if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
-          response.json({"fulfillmentText":""+user.errorCreateTicket.message});
-          
-        }
+    //Inicia sessão do usuário
+    await user.initSession();
+    //Verfica se foi iniciado corretamente
+    if(user.errorLogin != undefined && user.errorLogin != null){
+      response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
 
-        response.json({"fulfillmentText":"Um chamado para a criação do seu e-mail foi aberto, em breve um de nosso analista irá ralizar o atendimento!\n id do Chamado: "+user.ticketCreated.id+"."});
-        
-    
+    }
+    //Cria o chamado
+    await user.createTicket("Criação de e-mail para a unidade "+unidade,"Nome:"+nome+"\n"+"\n"+utilidade+"\n\nSolicitado por: "+userGlpi);
+    //Verifica se o chamado foi criado corretamente
+    if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
+      response.json({"fulfillmentText":""+user.errorCreateTicket.message});
+
+    }
+
+    response.json({"fulfillmentText":"Um chamado para a criação do seu e-mail foi aberto, em breve um de nosso analista irá ralizar o atendimento!\n id do Chamado: "+user.ticketCreated.id+"."});
   }
-  
-  
   
   else if (intentName == "Problema.Internet - sem.Internet"){
     
