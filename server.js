@@ -25,7 +25,7 @@ app.post("/glpi", async (request, response) => {
   
   let intentMap = new Map();
   intentMap.set('Internet_lenta_não_resolvido',teste);
-  intentMap.set('Impressora_não_Instalada',teste);
+  intentMap.set('Impressora_não_Instalada',Instalar_Impressora);
   intentMap.set('Instalar_Impressora',inst_impressoras);
   intentMap.set('Abre_Chamados',Abre_Chamados);
   
@@ -64,6 +64,34 @@ app.post("/glpi", async (request, response) => {
   }
   
   
+  async function CInstalar_Impressora(agent){
+        var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    
+    var ticket = {
+      name: intentName,
+      content: request.body.queryResult.parameters['Ticket']
+    };
+    
+    //Inicia sessão do usuário
+    await user.initSession();
+    
+    //Verfica se foi iniciado corretamente
+    if(user.errorLogin != undefined && user.errorLogin != null){
+      response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
+    }
+    
+    //Cria o chamado
+    await user.createTicket(ticket.name,ticket.content);
+    
+    //Verifica se o chamado foi criado corretamente
+    if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
+      response.json({"fulfillmentText":""+user.errorCreateTicket.message});
+    }
+    
+    response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
+    
+  }
+  
   function inst_impressoras(agent){
     response.json({"fulfillmentMessages": 
     [
@@ -85,7 +113,7 @@ app.post("/glpi", async (request, response) => {
       {
         "text": {
           "text": [
-            "Segundo Passo: Será aberta uma janela contendo todas as impressoras disponiveis para a instalação, basta escolher a impressora desejada e clicar duas vezes nela."
+            "Segundo Passo: Será aberta uma janela contendo todas as impressoras disponiveis para a instalação, basta escolher a desejada e clicar duas vezes."
           ]
         }
       },
@@ -99,7 +127,15 @@ app.post("/glpi", async (request, response) => {
       {
         "text": {
           "text": [
-            "Terceiro Passo: agora sua impressora vai estar diponivel na lista de impressora, basta seleceionar."
+            "Terceiro Passo: agora sua impressora vai estar diponivel na lista de impressora, basta selecioná-lá na hora de ralizar a impressão!."
+          ]
+        }
+      },
+      
+      {
+        "text": {
+          "text": [
+            "Por favor informe se o problema foi resolvido!"
           ]
         }
       },
