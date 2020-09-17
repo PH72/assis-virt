@@ -78,9 +78,17 @@ app.post("/glpi", async (request, response) => {
       
       {
         "card": {
-        "imageUri": "https://firebasestorage.googleapis.com/v0/b/webhook-9a993.appspot.com/o/Tutoriais%2FSem%20t%C3%ADtulo%201.png?alt=media&token=02deb325-3ea9-4b7a-bc27-69e6a0318b46"
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Caminho_imp.png?alt=media&token=1d1d16f6-ebcc-497d-86b1-a9273d163630"
         }     
-      }
+      },
+      
+      {
+        "text": {
+          "text": [
+            "Segundo Passo: Será aberta uma janela contendo todas as impressoras disponiveis para a instalação, basta escolher a impressora desejada e clicar duas vezes nela."
+          ]
+        }
+      },
       
     ]})
   }
