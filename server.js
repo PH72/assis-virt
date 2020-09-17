@@ -26,6 +26,7 @@ app.post("/glpi", async (request, response) => {
   let intentMap = new Map();
   intentMap.set('Internet_lenta_não_resolvido',teste);
   intentMap.set('Impressora_não_Instalada',teste);
+  intentMap.set('Instalar_Impressora',inst_impressoras);
   intentMap.set('Abre_Chamados',Abre_Chamados);
   
   agent.handleRequest(intentMap);
@@ -63,6 +64,18 @@ app.post("/glpi", async (request, response) => {
   }
   
   
+  function inst_impressoras(agent){
+    response.json({"fulfillmentMessages": 
+    [
+      
+      {
+        "card": {
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/webhook-9a993.appspot.com/o/Tutoriais%2FSem%20t%C3%ADtulo%201.png?alt=media&token=02deb325-3ea9-4b7a-bc27-69e6a0318b46"
+        }     
+      }
+      
+    ]})
+  }
   
   if (intentName == ""){
     let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
