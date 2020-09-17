@@ -78,7 +78,7 @@ app.post("/glpi", async (request, response) => {
       
       {
         "card": {
-        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Caminho_imp.png?alt=media&token=1d1d16f6-ebcc-497d-86b1-a9273d163630"
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Tutoriais%2FTutorial%20impressoras%2FCaminho_imp.png?alt=media&token=61204dd4-3dbb-405a-8ac8-06f5ee76df58"
         }     
       },
       
@@ -89,6 +89,22 @@ app.post("/glpi", async (request, response) => {
           ]
         }
       },
+      
+      {
+        "card": {
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Tutoriais%2FTutorial%20impressoras%2Fimpressoras.PNG?alt=media&token=88a7c84e-f409-4d1c-942e-898497298915"
+        }     
+      },
+      
+      {
+        "text": {
+          "text": [
+            "Terceiro Passo: agora sua impressora vai estar diponivel na lista de impressora, basta seleceionar."
+          ]
+        }
+      },
+      
+      
       
     ]})
   }
