@@ -44,7 +44,7 @@ app.post("/glpi", async (request, response) => {
       name: intentName,
       content:'Colaborador realizou o tutorial porem não conseguiu fazer a instalação da impressora.\n\n'+
       'Nome do colaborador:'+nome+
-      'Setor do Colaborador:'+setor
+      '\nSetor do Colaborador:'+setor
     };
     
     
@@ -65,7 +65,7 @@ app.post("/glpi", async (request, response) => {
     }
     
     response.json({"fulfillmentText":"Como Você não conseguiu realizar o autoatendimento iremos abrir um chamado para um de nossos analistas possa realizar o seu atendimento, seu chamdo é o id: "+user.ticketCreated.id+"."+
-                  'Mais informações do seu chamados podem ser verificadas no site http://chamados.febracis.local'});
+                  '\n\nMais informações do seu chamados podem ser verificadas no site http://chamados.febracis.local'});
   }
   
   
