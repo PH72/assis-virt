@@ -37,12 +37,15 @@ app.post("/glpi", async (request, response) => {
   }
   
   async function Abre_Chamados(agent){
-    var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    let nome = request.body.queryResult.parameters['Nome']
+    let setor = request.body.queryresult.parameters['Setor']
     
-    var ticket = {
+    let ticket = {
       name: intentName,
       content: request.body.queryResult.parameters['Ticket']
     };
+    
     
     //Inicia sessão do usuário
     await user.initSession();
@@ -64,12 +67,15 @@ app.post("/glpi", async (request, response) => {
   }
   
   
-  async function CInstalar_Impressora(agent){
-        var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+  async function Instalar_Impressora(agent){
+    let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    let nome = request.body.queryResult.parameters['Nome']
+    let setor = request.body.queryresult.parameters['Setor']
     
-    var ticket = {
+    let ticket = {
       name: intentName,
-      content: request.body.queryResult.parameters['Ticket']
+      content: "Colaborador realizou o tutorial porem não conseguiu fazer a instalação da impressora.\n\n" + 
+      " "
     };
     
     //Inicia sessão do usuário
@@ -88,7 +94,7 @@ app.post("/glpi", async (request, response) => {
       response.json({"fulfillmentText":""+user.errorCreateTicket.message});
     }
     
-    response.json({"fulfillmentText":"Chamado criado com sucesso! id: "+user.ticketCreated.id+"."});
+    response.json({"fulfillmentText":"Como Você não conseguiu realizar o autoatendimento iremos abrir um chamado para um de nossos analistas possa realizar o seu atendimento, seu chamdo é o id: "+user.ticketCreated.id+"."});
     
   }
   
