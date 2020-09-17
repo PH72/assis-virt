@@ -36,14 +36,12 @@ app.post("/glpi", async (request, response) => {
     agent.setFollowupEvent('teste');
   }
   
-  async function Abre_Chamados(agent){
+  async function Instalar_Impressora(agent){
     let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
-    let nome = request.body.queryResult.parameters['Nome']
-    let setor = request.body.queryresult.parameters['Setor']
     
     let ticket = {
       name: intentName,
-      content: request.body.queryResult.parameters['Ticket']
+      content: 'teste'
     };
     
     
@@ -67,15 +65,14 @@ app.post("/glpi", async (request, response) => {
   }
   
   
-  async function Instalar_Impressora(agent){
-    let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+  async function Abre_Chamados(agent){
+    var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
     let nome = request.body.queryResult.parameters['Nome']
     let setor = request.body.queryresult.parameters['Setor']
     
-    let ticket = {
+    var ticket = {
       name: intentName,
-      content: "Colaborador realizou o tutorial porem não conseguiu fazer a instalação da impressora.\n\n" + 
-      " "
+      content: "Colaborador realizou o tutorial porem não conseguiu fazer a instalação da impressora."
     };
     
     //Inicia sessão do usuário
