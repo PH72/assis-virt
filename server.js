@@ -24,10 +24,11 @@ app.post("/glpi", async (request, response) => {
   var intentName = request.body.queryResult.intent.displayName;
   
   let intentMap = new Map();
+  
+  intentMap.set('Instalar_Impressora',Manual_Impressoras);
   intentMap.set('Impressora_não_Instalada',Chamado_Instalar_Impressora);
   intentMap.set('Internet_lenta_não_resolvido',Chamado_Internet_Lenta);
-  intentMap.set('Instalar_Impressora',inst_impressoras);
-  intentMap.set('Internet_lenta_não_resolvido',teste);
+  //intentMap.set('Internet_lenta_não_resolvido',teste);
   
   agent.handleRequest(intentMap);
   
@@ -70,11 +71,14 @@ app.post("/glpi", async (request, response) => {
   
   
   async function Chamado_Internet_Lenta(agent){
-    var user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
-    
-    var ticket = {
+    let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    let nome = request.body.queryResult.parameters['Nome'];
+    let setor = request.body.queryResult.parameters['Setor'];
+    let ticket = {
       name: intentName,
-      content: 'Colaborador realizou o tutorial porem não conseguiu fazer a instalação da impressora.'
+      content:'Colaborador realizou o tutorial de alto atendimeto, porem não conseguiu resolver o seu problema de lentidaão de internet.\n\n'+
+      'Nome do colaborador:'+nome+
+      '\nSetor do Colaborador:'+setor
     };
     
     //Inicia sessão do usuário
@@ -98,7 +102,7 @@ app.post("/glpi", async (request, response) => {
   }
   
   
-  function inst_impressoras(agent){
+  function Manual_Impressoras(agent){
     response.json({"fulfillmentMessages": 
     [
       
