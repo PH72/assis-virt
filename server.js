@@ -26,6 +26,7 @@ app.post("/glpi", async (request, response) => {
   let intentMap = new Map();
   
   intentMap.set('Instalar_Impressora',Manual_Impressoras);
+  intentMap.set('Internet_lenta_não_resolvido',Manual_Internet_Lenta)
   intentMap.set('Impressora_não_Instalada',Chamado_Instalar_Impressora);
   intentMap.set('Internet_lenta_não_resolvido',Chamado_Internet_Lenta);
   //intentMap.set('Internet_lenta_não_resolvido',teste);
@@ -69,7 +70,6 @@ app.post("/glpi", async (request, response) => {
                   '\n\nMais informações do seu chamados podem ser verificadas no site http://chamados.febracis.local'});
   }
   
-  
   async function Chamado_Internet_Lenta(agent){
     let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
     let nome = request.body.queryResult.parameters['Nome'];
@@ -77,7 +77,7 @@ app.post("/glpi", async (request, response) => {
     let ticket = {
       name: intentName,
       content:'Colaborador realizou o tutorial de alto atendimeto, porem não conseguiu resolver o seu problema de lentidaão de internet.\n\n'+
-      'Nome do colaborador:'+nome+
+      'Nome do Colaborador:'+nome+
       '\nSetor do Colaborador:'+setor
     };
     
@@ -102,6 +102,7 @@ app.post("/glpi", async (request, response) => {
   }
   
   
+  
   function Manual_Impressoras(agent){
     response.json({"fulfillmentMessages": 
     [
@@ -110,6 +111,59 @@ app.post("/glpi", async (request, response) => {
         "text": {
           "text": [
             "Primeiro Passo: abra a aba de busca do seu computador e digite o endereço como mostrado na imagen abaixo."
+          ]
+        }
+      },
+      
+      {
+        "card": {
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Tutoriais%2FTutorial%20impressoras%2FCaminho_imp.png?alt=media&token=61204dd4-3dbb-405a-8ac8-06f5ee76df58"
+        }     
+      },
+      
+      {
+        "text": {
+          "text": [
+            "Segundo Passo: Será aberta uma janela contendo todas as impressoras disponiveis para a instalação, basta escolher a desejada e clicar duas vezes."
+          ]
+        }
+      },
+      
+      {
+        "card": {
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Tutoriais%2FTutorial%20impressoras%2Fimpressoras.PNG?alt=media&token=88a7c84e-f409-4d1c-942e-898497298915"
+        }     
+      },
+      
+      {
+        "text": {
+          "text": [
+            "Terceiro Passo: agora sua impressora vai estar diponivel na lista de impressora, basta selecioná-lá na hora de ralizar a impressão!."
+          ]
+        }
+      },
+      
+      {
+        "text": {
+          "text": [
+            "Por favor informe se o problema foi resolvido!"
+          ]
+        }
+      },
+      
+      
+      
+    ]})
+  }
+  
+  function Manual_Internet_Lenta(agent){
+    response.json({"fulfillmentMessages": 
+    [
+      
+      {
+        "text": {
+          "text": [
+            "Primeiro Passo: Verifique em que rede sua maquina está conectada"
           ]
         }
       },
