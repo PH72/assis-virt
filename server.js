@@ -26,7 +26,7 @@ app.post("/glpi", async (request, response) => {
   let intentMap = new Map();
   
   intentMap.set('Instalar_Impressora',Manual_Impressoras);
-  intentMap.set('Internet_lenta_não_resolvido',Manual_Internet_Lenta)
+  intentMap.set('Internet_lenta',Manual_Internet_Lenta)
   intentMap.set('Impressora_não_Instalada',Chamado_Instalar_Impressora);
   intentMap.set('Internet_lenta_não_resolvido',Chamado_Internet_Lenta);
   //intentMap.set('Internet_lenta_não_resolvido',teste);
@@ -163,7 +163,7 @@ app.post("/glpi", async (request, response) => {
       {
         "text": {
           "text": [
-            "Primeiro Passo: Verifique em que rede sua maquina está conectada"
+            'Primeiro Passo: Verifique em que rede sua maquina está conectada a rede "Interno" como mostrado na figura abaixo!'
           ]
         }
       },
