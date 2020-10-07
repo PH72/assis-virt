@@ -163,7 +163,7 @@ app.post("/glpi", async (request, response) => {
       {
         "text": {
           "text": [
-            'Primeiro Passo: Verifique em que rede sua maquina está conectada a rede "Interno" como mostrado na figura abaixo!'
+            'Primeiro Passo: Verifique em que rede sua maquina está conectada a rede "Interno" como mostrado na figura abaixo, caso não esteja tente se logar a essa rede a seha é "F3br@c152017"'
           ]
         }
       },
