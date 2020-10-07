@@ -69,40 +69,6 @@ app.post("/glpi", async (request, response) => {
     response.json({"fulfillmentText":"Como Você não conseguiu realizar o autoatendimento iremos abrir um chamado para um de nossos analistas possa realizar o seu atendimento, seu chamdo é o id: "+user.ticketCreated.id+"."+
                   '\n\nMais informações do seu chamados podem ser verificadas no site http://chamados.febracis.local'});
   }
-  
-  async function Chamado_Internet_Lenta(agent){
-    let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
-    let nome = request.body.queryResult.parameters['Nome'];
-    let setor = request.body.queryResult.parameters['Setor'];
-    let ticket = {
-      name: intentName,
-      content:'Colaborador realizou o tutorial de alto atendimeto, porem não conseguiu resolver o seu problema de lentidaão de internet.\n\n'+
-      'Nome do Colaborador:'+nome+
-      '\nSetor do Colaborador:'+setor
-    };
-    
-    //Inicia sessão do usuário
-    await user.initSession();
-    
-    //Verfica se foi iniciado corretamente
-    if(user.errorLogin != undefined && user.errorLogin != null){
-      response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
-    }
-    
-    //Cria o chamado
-    await user.createTicket(ticket.name,ticket.content);
-    
-    //Verifica se o chamado foi criado corretamente
-    if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
-      response.json({"fulfillmentText":""+user.errorCreateTicket.message});
-    }
-    
-    response.json({"fulfillmentText":"Como Você não conseguiu realizar o autoatendimento iremos abrir um chamado para um de nossos analistas possa realizar o seu atendimento, seu chamdo é o id: "+user.ticketCreated.id+"."});
-    
-  }
-  
-  
-  
   function Manual_Impressoras(agent){
     response.json({"fulfillmentMessages": 
     [
@@ -156,6 +122,37 @@ app.post("/glpi", async (request, response) => {
     ]})
   }
   
+  
+  async function Chamado_Internet_Lenta(agent){
+    let user = new UserGlpi(request.headers['login'],request.headers['senha'],request.headers['app-token']);
+    let nome = request.body.queryResult.parameters['Nome'];
+    let setor = request.body.queryResult.parameters['Setor'];
+    let ticket = {
+      name: intentName,
+      content:'Colaborador realizou o tutorial de alto atendimeto, porem não conseguiu resolver o seu problema de lentidaão de internet.\n\n'+
+      'Nome do Colaborador:'+nome+
+      '\nSetor do Colaborador:'+setor
+    };
+    
+    //Inicia sessão do usuário
+    await user.initSession();
+    
+    //Verfica se foi iniciado corretamente
+    if(user.errorLogin != undefined && user.errorLogin != null){
+      response.json({"fulfillmentText":""+user.errorLogin.message+" Você quer tentar novamente?"});
+    }
+    
+    //Cria o chamado
+    await user.createTicket(ticket.name,ticket.content);
+    
+    //Verifica se o chamado foi criado corretamente
+    if(user.errorCreateTicket != undefined && user.errorCreateTicket != null){
+      response.json({"fulfillmentText":""+user.errorCreateTicket.message});
+    }
+    
+    response.json({"fulfillmentText":"Como Você não conseguiu realizar o autoatendimento iremos abrir um chamado para um de nossos analistas possa realizar o seu atendimento, seu chamdo é o id: "+user.ticketCreated.id+"."});
+    
+  }
   function Manual_Internet_Lenta(agent){
     response.json({"fulfillmentMessages": 
     [
