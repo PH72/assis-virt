@@ -167,7 +167,7 @@ app.post("/glpi", async (request, response) => {
       
       {
         "card": {
-        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Tutoriais%2FTutorial%20impressoras%2FCaminho_imp.png?alt=media&token=61204dd4-3dbb-405a-8ac8-06f5ee76df58"
+        "imageUri": "https://firebasestorage.googleapis.com/v0/b/assistente-de-chamados-bamc.appspot.com/o/Tutoriais%2FTutorial%20internet%20Lenta%2Frede.png?alt=media&token=7eb3515e-514c-43be-8273-5f3f03fccde8"
         }     
       },
       
